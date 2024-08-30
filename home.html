@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embassy Registration Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a5f7a;
+            --secondary-color: #57c5b6;
+            --background-color: #f9f9f9;
+            --text-color: #333;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .header {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 20px;
+        }
+        .logo {
+            width: 60px;
+            height: 60px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .search-container {
+            margin-bottom: 20px;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            box-shadow: var(--card-shadow);
+        }
+        .user-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .user-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+        }
+        .user-card:hover {
+            transform: translateY(-5px);
+        }
+        .user-photo {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .user-info {
+            padding: 20px;
+        }
+        .user-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .user-details {
+            font-size: 14px;
+            color: #666;
+        }
+        .user-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+        }
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-edit {
+            background-color: var(--secondary-color);
+            color: #fff;
+        }
+        .btn-delete {
+            background-color: #e74c3c;
+            color: #fff;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .no-results {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-color);
+            grid-column: 1 / -1;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+            .user-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">E</div>
+            <h1>Embassy Registration Dashboard</h1>
+        </div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search users...">
+        </div>
+        <div class="user-list" id="userList">
+            <!-- User cards will be populated here -->
+        </div>
+        <div id="noResults" class="no-results" style="display: none;">
+            No users found matching your search criteria.
+        </div>
+    </div>
+
+    <script>
+        // Mock data for demonstration
+        const users = [
+            { id: 1, fullName: "John Doe", phone: "+1 234 567 8901", work: "Software Engineer", place: "USA", registrationDate: "2023-05-15", photo: "/placeholder.svg?height=200&width=300" },
+            { id: 2, fullName: "Jane Smith", phone: "+44 20 7123 4567", work: "Teacher", place: "UK", registrationDate: "2023-05-14", photo: "/placeholder.svg?height=200&width=300" },
+            { id: 3, fullName: "Alice Johnson", phone: "+1 416 555 0123", work: "Doctor", place: "Canada", registrationDate: "2023-05-13", photo: "/placeholder.svg?height=200&width=300" },
+            { id: 4, fullName: "Bob Williams", phone: "+61 2 8765 4321", work: "Architect", place: "Australia", registrationDate: "2023-05-12", photo: "/placeholder.svg?height=200&width=300" },
+            { id: 5, fullName: "Charlie Brown", phone: "+33 1 23 45 67 89", work: "Chef", place: "Other", registrationDate: "2023-05-11", photo: "/placeholder.svg?height=200&width=300" },
+        ];
+
+        const userList = document.getElementById('userList');
+        const searchInput = document.getElementById('searchInput');
+        const noResults = document.getElementById('noResults');
+
+        function renderUserCards(data) {
+            userList.innerHTML = '';
+            if (data.length === 0) {
+                noResults.style.display = 'block';
+                return;
+            }
+            noResults.style.display = 'none';
+            data.forEach(user => {
+                const card = document.createElement('div');
+                card.className = 'user-card';
+                card.innerHTML = `
+                    <img src="${user.photo}" alt="${user.fullName}" class="user-photo">
+                    <div class="user-info">
+                        <div class="user-name">${user.fullName}</div>
+                        <div class="user-details">
+                            <p>Phone: ${user.phone}</p>
+                            <p>Work: ${user.work}</p>
+                            <p>Place: ${user.place}</p>
+                            <p>Registered: ${user.registrationDate}</p>
+                        </div>
+                    </div>
+                    <div class="user-actions">
+                        <button class="btn btn-edit">Edit</button>
+                        <button class="btn btn-delete">Delete</button>
+                    </div>
+                `;
+                userList.appendChild(card);
+            });
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredUsers = users.filter(user => 
+                Object.values(user).some(value => 
+                    value.toString().toLowerCase().includes(searchTerm)
+                )
+            );
+            renderUserCards(filteredUsers);
+        });
+
+        // Initial render
+        renderUserCards(users);
+    </script>
+</body>
+</html>

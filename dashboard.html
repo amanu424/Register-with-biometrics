@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embassy Registration Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css" type="text/css" media="all" />
+</head>
+<body>
+    <div class="header">
+        <div class="logo">E</div>
+        <h1>Embassy Registration Dashboard</h1>
+    </div>
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search users...">
+        </div>
+        <div class="user-list" id="userList">
+            <!-- User cards will be populated here -->
+        </div>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2023 Embassy Registration System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Mock data for demonstration
+        const users = [
+            { id: 1, fullName: "John Doe", phone: "+1 234 567 8901", work: "Software Engineer", place: "USA", registrationDate: "2023-05-15", photo: "https://loremflickr.com/100/200?random=1" },
+            { id: 2, fullName: "Jane Smith", phone: "+44 20 7123 4567", work: "Teacher", place: "UK", registrationDate: "2023-05-14", photo: "https://loremflickr.com/100/200?random=2" },
+            { id: 3, fullName: "Alice Johnson", phone: "+1 416 555 0123", work: "Doctor", place: "Canada", registrationDate: "2023-05-13", photo: "https://loremflickr.com/100/200?random=3" },
+            { id: 4, fullName: "Bob Williams", phone: "+61 2 8765 4321", work: "Architect", place: "Australia", registrationDate: "2023-05-12", photo: "https://loremflickr.com/100/200?random=4" },
+            { id: 5, fullName: "Charlie Brown", phone: "+33 1 23 45 67 89", work: "Chef", place: "Other", registrationDate: "2023-05-11", photo: "https://loremflickr.com/100/200?random=5" },
+        ];
+
+        const userList = document.getElementById('userList');
+        const searchInput = document.getElementById('searchInput');
+
+        function renderUserCards(data) {
+            userList.innerHTML = '';
+            if (data.length === 0) {
+                userList.innerHTML = '<div class="no-results">No users found matching your search criteria.</div>';
+                return;
+            }
+            data.forEach(user => {
+                const card = document.createElement('div');
+                card.className = 'user-card';
+                card.innerHTML = `
+                    <img src="${user.photo}" alt="${user.fullName}" class="user-photo">
+                    <div class="user-info">
+                        <div class="user-name">${user.fullName}</div>
+                        <div class="user-details">
+                            <p>Phone: ${user.phone}</p>
+                            <p>Work: ${user.work}</p>
+                            <p>Place: ${user.place}</p>
+                            <p>Registered: ${user.registrationDate}</p>
+                        </div>
+                    </div>
+                    <div class="user-actions">
+                        <button class="btn btn-edit">Edit</button>
+                        <button class="btn btn-delete">Delete</button>
+                    </div>
+                `;
+                userList.appendChild(card);
+            });
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredUsers = users.filter(user => 
+                Object.values(user).some(value => 
+                    value.toString().toLowerCase().includes(searchTerm)
+                )
+            );
+            renderUserCards(filteredUsers);
+        });
+
+        // Initial render
+        renderUserCards(users);
+    </script>
+</body>
+</html>

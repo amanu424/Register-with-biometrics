@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embassy Registration Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/dashboard.css" type="text/css" media="all" />
+</head>
+<body>
+    <% console.log(users) %>
+    <div class="header">
+        <div class="logo">E</div>
+        <h1>Embassy Registration Dashboard</h1>
+    </div>
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search users...">
+        </div>
+        <div class="user-list" id="userList">
+            <!-- User cards will be populated here -->
+        </div>
+    </div>
+    <footer class="footer">
+        <form method="post" action="/logout" class="">
+              <input type="submit" value="Logout" class="btn btn-delete" />
+          </form> <br>
+        <p>&copy; 2023 Embassy Registration System. All rights reserved.</p>
+    </footer>
+
+  <script>
+        // Mock data for demonstration
+        const users = JSON.parse('<%-JSON.stringify(users)%>')
+        
+        function confirmDelete() {
+    return confirm("Are you sure you want to delete this user? This action cannot be undone.");
+}
+
+        const userList = document.getElementById('userList');
+        const searchInput = document.getElementById('searchInput');
+
+        function renderUserCards(data) {
+            userList.innerHTML = '';
+            if (data.length === 0) {
+                userList.innerHTML = '<div class="no-results">No users found matching your search criteria.</div>';
+                return;
+            }
+            data.forEach(user => {
+                const card = document.createElement('div');
+                card.className = 'user-card';
+                card.innerHTML = `
+                    <img src="${user.photo}" alt="${user.fullName}" class="user-photo">
+                    <div class="user-info">
+                        <div class="user-name">${user.name}</div>
+                        <div class="user-details">
+                            <p>Phone: ${user.phone}</p>
+                            <p>Work: ${user.work}</p>
+                            <p>Place: ${user.country}</p>
+                            <p>reason: ${user.reason}</p>
+                            
+                        </div>
+                    </div>
+                    <div class="user-actions">
+                        <a href="/update" class="btn btn-edit">Edit</a>
+                        <form onsubmit="return confirmDelete()" method="post" action="/delete" class="user-actions">
+                        <input type="hidden" name="userId" value="${user._id }">
+                          <input type="submit" value="Delete" class="btn btn-delete" />
+                        </form>
+                    </div>
+                `;
+                userList.appendChild(card);
+            });
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredUsers = users.filter(user => 
+                Object.values(user).some(value => 
+                    value.toString().toLowerCase().includes(searchTerm)
+                )
+            );
+            renderUserCards(filteredUsers);
+        });
+
+        // Initial render
+        renderUserCards(users);
+    </script>
+</body>
+</html>
