@@ -14,7 +14,7 @@ connectDB();
 
 // Set EJS as templating engine
 app.set('view engine', 'ejs');
-
+app.set('viewss', path.join(__dirname, 'views'))
 // Middleware
 app.use(flash())
 app.use(express.urlencoded({ extended: true }));
