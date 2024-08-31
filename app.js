@@ -22,8 +22,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'secre', resave: false, saveUninitialized: true }));
 // Routes
 app.use('/', authRoutes);
-app.use('/', defaultRoute);
 app.use('/', dashboardRoutes);
+app.use('/*', defaultRoute);
 
 // Global error handler
 app.use((err, req, res, next) => {

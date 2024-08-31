@@ -25,7 +25,22 @@ body {
   min-height: 100vh;
   padding: 20px;
 }
-
+#registrationForm{
+  position: relative;
+}
+.dispError{
+  top: -3%;
+  right: 50%;
+  text-align: center;
+  font-size: .8rem;
+  transform: translateX(50%);
+  position: absolute;
+  padding: 5px 15px;
+  border-radius: 3px;
+  background-color: red;
+  color: white;
+  opacity: ;
+}
 .container {
   width: 100%;
   max-width: 500px;

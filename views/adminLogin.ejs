@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/login.css" type="text/css" media="all" />
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">E</div>
+            <h1>Admin Login</h1>
+        </div>
+        <form id="loginForm" action="/admingoofymypermissionlogin" method="post">
+          <% if(messages.error) { %>
+            <div class="dispError">
+              <p> <%= messages.error %> </p>
+            </div>
+          <% } %>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required>
+                <div class="error" id="phoneError"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <div class="error" id="passwordError"></div>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <div class="forgot-password">
+            <a href="#" id="forgotPassword">Forgot Password?</a>
+        </div>
+        <div class="success-message" id="successMessage">
+            Login successful! Welcome back.
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        const forgotPasswordLink = document.getElementById('forgotPassword');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Reset error messages
+            document.querySelectorAll('.error').forEach(el => el.textContent = '');
+            
+            let isValid = true;
+            
+            // Validate Phone
+            const phone = document.getElementById('phone');
+            if (phone.value.trim() === '') {
+                document.getElementById('phoneError').textContent = 'Phone number is required';
+                isValid = false;
+            } else if (!/^\+?[\d\s-]{10,}$/.test(phone.value)) {
+                document.getElementById('phoneError').textContent = 'Please enter a valid phone number';
+                isValid = false;
+            }
+            
+            // Validate Password
+            const password = document.getElementById('password');
+            if (password.value.trim() === '') {
+                document.getElementById('passwordError').textContent = 'Password is required';
+                isValid = false;
+            }
+            
+            if (isValid) {
+              e.currentTarget.submit();
+            }
+        });
+
+        forgotPasswordLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            // In a real application, you would implement the forgot password functionality here
+            alert('Forgot password functionality would be implemented here.');
+        });
+    </script>
+</body>
+</html>

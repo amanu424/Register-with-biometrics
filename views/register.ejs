@@ -14,52 +14,57 @@
             <h1>Embassy Registration Form</h1>
         </div>
         <form id="registrationForm" action="/register" method="post" enctype="multipart/form-data">
+          <% if(messages.error) { %>
+            <div class="dispError">
+              <p> <%= messages.error %> </p>
+            </div>
+          <% } %>
             <div class="form-group">
-                <label for="name">Full Name</label>
+                <label for="name">Full Name (ሙሉ ስም)</label>
                 <input type="text" id="fullName" name="name" required>
                 <div class="error" id="fullNameError"></div>
             </div>
             <div class="form-group">
-                <label for="phone">Phone</label>
+                <label for="phone">Phone (ስልክ ቁጥር)</label>
                 <input type="tel" id="phone" name="phone" required>
                 <div class="error" id="phoneError"></div>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">Password(ፓስዎርድ)</label>
                 <input type="password" id="password" name="password" required>
                 <div class="error" id="passwordError"></div>
             </div>
             <div class="form-group">
-                <label for="work">Work</label>
+                <label for="work">Work (ስራ)</label>
                 <input type="text" id="work" name="work" required>
                 <div class="error" id="workError"></div>
             </div>
             <div class="form-group">
-                <label for="place">Place</label>
+                <label for="place">Place (የሚሄዱበት ሀገር)</label>
                 <select id="place" name="country" required>
-                    <option value="">Select a place</option>
-                    <option value="usa">USA</option>
-                    <option value="uk">UK</option>
-                    <option value="canada">Canada</option>
-                    <option value="australia">Australia</option>
-                    <option value="other">Other</option>
+                    <option value="">ሀገር ይምረጡ</option>
+                    <option value="usa">USA(አሜሪካ) </option>
+                    <option value="uk">UK (ኢንግላንድ) </option>
+                    <option value="canada">Canada (ካናዳ) </option>
+                    <option value="australia">Australia (አውስትራሊያ) </option>
+                    <option value="other">Other (ሌላ) </option>
                 </select>
                 <div class="error" id="placeError"></div>
             </div>
             <div class="form-group">
-                <label for="reason">Reason</label>
+                <label for="reason">Reason ( የሚሄዱበት ምክንያት) </label>
                 <select id="reason" name="reason" required>
-                    <option value="">Reason </option>
-                    <option value="usa">USA</option>
-                    <option value="uk">UK</option>
-                    <option value="canada">Canada</option>
-                    <option value="australia">Australia</option>
-                    <option value="other">Other</option>
+                    <option value="">ምክንያት ይምረጡ  </option>
+                    <option value="usa">ለስራ </option>
+                    <option value="uk">ለጉብኝት </option>
+                    <option value="canada">ለትምህርት </option>
+                    <option value="australia">ሌላ</option>
+                   
                 </select>
                 <div class="error" id="reasonError"></div>
             </div>
             <div class="form-group">
-                <label for="photograph">Photograph</label>
+                <label for="photograph">Photograph (ጉርድ ፎቶ) </label>
                 <div class="file-input-wrapper">
                     <button type="button" class="file-input-button">Choose Photo</button>
                     <input type="file" id="photograph" name="photo" accept="image/*" required>
@@ -67,7 +72,7 @@
                 <div class="file-name" id="fileName"></div>
                 <div class="error" id="photographError"></div>
             </div>
-            <button type="submit">Register</button>
+            <button id="sbt" type="submit">Register</button>
         </form>
         <div class="success-message" id="successMessage">
             Registration successful! Thank you for registering.
@@ -146,8 +151,11 @@
                 isValid = false;
             }
             
+            
             if (isValid) {
+              
                 e.currentTarget.submit();
+                
             }
         });
     </script>

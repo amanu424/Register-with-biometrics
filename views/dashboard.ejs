@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="/dashboard.css" type="text/css" media="all" />
 </head>
 <body>
-    <% console.log(users) %>
     <div class="header">
         <div class="logo">E</div>
         <h1>Embassy Registration Dashboard</h1>
@@ -53,15 +52,15 @@
                     <div class="user-info">
                         <div class="user-name">${user.name}</div>
                         <div class="user-details">
-                            <p>Phone: ${user.phone}</p>
-                            <p>Work: ${user.work}</p>
-                            <p>Place: ${user.country}</p>
-                            <p>reason: ${user.reason}</p>
+                            <p>Phone/ስልክ ቁጥር:  ${user.phone}</p>
+                            <p>Work/ስራ: ${user.work}</p>
+                            <p>Place/የሚሄዱበት ሀገር: ${user.country}</p>
+                            <p>reason/የሚሄዱበት ምክንያት: ${user.reason}</p>
                             
                         </div>
                     </div>
                     <div class="user-actions">
-                        <a href="/update" class="btn btn-edit">Edit</a>
+                        
                         <form onsubmit="return confirmDelete()" method="post" action="/delete" class="user-actions">
                         <input type="hidden" name="userId" value="${user._id }">
                           <input type="submit" value="Delete" class="btn btn-delete" />
