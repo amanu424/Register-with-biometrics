@@ -88,10 +88,12 @@ h1 {
   height: 200px;
   object-fit: cover;
   transition: .5s;
+  border-radius: 50%;
+  padding: 2.5% 25%;
 }
 .user-photo:hover{
-  padding: 2.5% 25%;
-  border-radius: 50%;
+  padding: 0;
+  border-radius: 0%;
   
 }
 .user-info {
