@@ -17,7 +17,7 @@
             <div class="form-group">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
-                <div class="error" id="phoneError"></div>
+                
             </div>
             <div class="form-group">
                 <label for="phone">Phone Number</label>
@@ -57,7 +57,7 @@
             if (phone.value.trim() === '') {
                 document.getElementById('phoneError').textContent = 'Phone number is required';
                 isValid = false;
-            } else if (!/^\+?[\d\s-]{10,}$/.test(phone.value)) {
+            } else if (!/^\+?[\d\s-]{4,}$/.test(phone.value)) {
                 document.getElementById('phoneError').textContent = 'Please enter a valid phone number';
                 isValid = false;
             }
