@@ -25,7 +25,7 @@ exports.postRegister = async (req, res) => {
     } catch (err) {
         console.log(err)
         req.flash("error", "Error, Try Again!!")
-        res.redirect('/register');
+        res.redirect('/biometrics');
     }
 };
 

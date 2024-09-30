@@ -4,8 +4,8 @@ class UserRepository {
   async createUser(userData) {
     try {
       const user = new User(userData);
-      console.log(user);
-      return await user.save();
+      return user;
+      //return await user.save();
     } catch (e) {
       console.log(e)
       throw e
