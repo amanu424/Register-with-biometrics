@@ -5,6 +5,9 @@ const bcrypt = require('bcryptjs');
 exports.getRegister = (req, res) => {
     res.render('register', { messages: req.flash() });
 };
+exports.getBiometrics = (req, res) => {
+    res.render('biometrics', { messages: req.flash() });
+};
 
 exports.getRegisterAdmin = (req, res) => {
   if(!req.session.adminId){
@@ -15,11 +18,10 @@ exports.getRegisterAdmin = (req, res) => {
 
 exports.postRegister = async (req, res) => {
     const { name, phone, password, work, reason, country } = req.body;
-    const photo = req.file ? req.file.path : null;  // Get photo path from Cloudinary
     try {
-        await userRepository.createUser({ name, phone, password, photo, work, reason, country });
+        await userRepository.createUser({ name, phone, password, work, reason, country });
         req.flash('success', 'You are registered')
-        res.redirect('/done');
+        res.redirect('/biometrics');
     } catch (err) {
         console.log(err)
         req.flash("error", "Error, Try Again!!")

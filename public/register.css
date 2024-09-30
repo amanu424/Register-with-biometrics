@@ -69,10 +69,11 @@ body {
   margin-bottom: 15px;
   box-shadow: var(--shadow);
 }
-h1 {
+#header {
   margin: 0;
   font-size: 28px;
   font-weight: 600;
+  color: #fff;
 }
 form {
   padding: 30px;
@@ -140,7 +141,7 @@ select:focus {
   font-size: 14px;
   margin-top: 5px;
 }
-button[type="submit"] {
+button[type="submit"], #next {
   background-color: var(--secondary-color);
   color: #fff;
   padding: 14px 20px;

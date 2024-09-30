@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
-const upload = require('../middlewares/multer');
 
 router.get('/register', authController.getRegister);
-router.post('/register', upload.single('photo'), authController.postRegister); 
+router.post('/register', authController.postRegister); 
+router.get('/biometrics', authController.getBiometrics);
 router.get('/login', authController.getLogin);
 router.post('/login', authController.postLogin);
 router.post('/logout', authController.logout);

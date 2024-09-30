@@ -1,19 +1,142 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Embassy Agent</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/login.css" type="text/css" media="all" />
+    <title>Form Submitted Successfully</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #4CAF50;
+            --background-color: #f0f4f8;
+            --text-color: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            text-align: center;
+            max-width: 90%;
+            width: 400px;
+        }
+
+        .check-mark {
+            width: 100px;
+            height: 100px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 2rem;
+            animation: scale-in 0.5s ease-out;
+        }
+
+        .check-mark svg {
+            width: 60px;
+            height: 60px;
+            fill: none;
+            stroke: white;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: draw 1s ease-in-out forwards 0.5s;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        @keyframes scale-in {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            .check-mark {
+                width: 80px;
+                height: 80px;
+            }
+
+            .check-mark svg {
+                width: 48px;
+                height: 48px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <div class="logo">C</div>
-            <h1>YOU HAVE SUBMITED YOUR DATA SUCCESSFULLY!!</h1>
-            <br/>
-            <h1>መረጃዎን በትክክል አስገብተው ጨርሰዋል። እናመሰግናለን!!</h1>
+        <div class="check-mark">
+            <svg viewBox="0 0 52 52">
+                <path d="M14 27l7.8 7.8L38 18" />
+            </svg>
         </div>
+        <h1>Form Submitted Successfully!</h1>
+        <p>Thank you for your submission. We have received your information and will process it shortly.</p>
+        <a href="/register" class="btn">Back to Home</a>
     </div>
 </body>
 </html>

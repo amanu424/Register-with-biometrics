@@ -11,9 +11,9 @@
     <div class="container">
         <div class="header">
             <div class="logo">E</div>
-            <h1>Embassy Registration Form</h1>
+            <h1 id="header">Embassy Registration Form</h1>
         </div>
-        <form id="registrationForm" action="/register" method="post" enctype="multipart/form-data">
+        <form id="registrationForm" action="/register" method="post">
           <% if(messages.error) { %>
             <div class="dispError">
               <p> <%= messages.error %> </p>
@@ -72,26 +72,22 @@
                 <div class="file-name" id="fileName"></div>
                 <div class="error" id="photographError"></div>
             </div>
-            <button id="sbt" type="submit">Register</button>
+            <button id="next" type="button">Next Step</button>
         </form>
         <div class="success-message" id="successMessage">
             Registration successful! Thank you for registering.
         </div>
-    </div>
+      </div>
 
     <script>
-        const form = document.getElementById('registrationForm');
-        const fileInput = document.getElementById('photograph');
-        const fileName = document.getElementById('fileName');
+        const form = document.getElementById('registrationForm');        const fileName = document.getElementById('fileName');
+        const next = document.getElementById('next');
+        const head = document.getElementsByTagName('head')[0]
 
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
-                fileName.textContent = e.target.files[0].name;
-            } else {
-                fileName.textContent = '';
-            }
-        });
-
+        
+        
+        
+        
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -145,18 +141,16 @@
             }
             
             // Validate Photograph
-            const photograph = document.getElementById('photograph');
-            if (photograph.files.length === 0) {
-                document.getElementById('photographError').textContent = 'Please upload a photograph';
-                isValid = false;
-            }
+            
             
             
             if (isValid) {
               
                 e.currentTarget.submit();
-                
+                window.location.href = "/biometrics"
             }
+            
+            
         });
     </script>
 </body>

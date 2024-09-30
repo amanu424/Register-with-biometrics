@@ -18,7 +18,7 @@ exports.deleteUser = async (req, res) => {
         // Delete the user's image from Cloudinary if it exists
         if (user.photo) {
             const publicId = user.photo.split('/').pop().split('.')[0]; // Extract public_id from the URL
-            await cloudinary.uploader.destroy(`user_photos/${publicId}`);
+            //await cloudinary.uploader.destroy(`user_photos/${publicId}`);
         }
         req.flash("success", "User deleted")
         res.redirect('/dashboard');
