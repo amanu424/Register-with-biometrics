@@ -56,7 +56,7 @@
             if (phone.value.trim() === '') {
                 document.getElementById('phoneError').textContent = 'Phone number is required';
                 isValid = false;
-            } else if (!/^\+?[\d\s-]{10,}$/.test(phone.value)) {
+            } else if (!/^\+?[\d\s-]{4,}$/.test(phone.value)) {
                 document.getElementById('phoneError').textContent = 'Please enter a valid phone number';
                 isValid = false;
             }

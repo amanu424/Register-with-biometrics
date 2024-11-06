@@ -167,3 +167,24 @@ button[type="submit"]:hover {
   font-weight: 600;
   display: none;
 }
+
+.misrak{
+  font-size: 1.25rem;
+  padding-block: 1rem .5rem ;
+  font-weight: bold;
+}
+
+address{
+  width: 100%;
+  background-color: var(--primary-color);
+  text-align: center;
+  margin-block: 1.75rem 0;
+  padding: 1rem;
+  border-radius: ;
+  color: var(--primary-color);
+  color: #fff;
+}
+address > p{
+  font-style: normal;
+  color: ;
+}

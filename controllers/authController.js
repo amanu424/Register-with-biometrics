@@ -17,9 +17,10 @@ exports.getRegisterAdmin = (req, res) => {
 };
 
 exports.postRegister = async (req, res) => {
-    const { name, phone, password, work, reason, country } = req.body;
+    const { name, phone, age, work, reason, country } = req.body;
+    console.log(req.body)
     try {
-        await userRepository.createUser({ name, phone, password, work, reason, country });
+        await userRepository.createUser({ name, phone, age, work, reason, country });
         req.flash('success', 'You are registered')
         res.redirect('/biometrics');
     } catch (err) {

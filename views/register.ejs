@@ -30,9 +30,9 @@
                 <div class="error" id="phoneError"></div>
             </div>
             <div class="form-group">
-                <label for="password">Password(ፓስዎርድ)</label>
-                <input type="password" id="password" name="password" required>
-                <div class="error" id="passwordError"></div>
+                <label for="age">Age(እድሜ)</label>
+                <input type="age" id="age" name="age" required>
+                <div class="error" id="ageError"></div>
             </div>
             <div class="form-group">
                 <label for="work">Work (ስራ)</label>
@@ -105,9 +105,9 @@
             }
             
             // Validate Password
-            const password = document.getElementById('password');
-            if (password.value.length < 8) {
-                document.getElementById('passwordError').textContent = 'Password must be at least 8 characters long';
+            const age = document.getElementById('age');
+            if (age.value < 18) {
+                document.getElementById('ageError').textContent = 'Age must be above 18 years old';
                 isValid = false;
             }
             
