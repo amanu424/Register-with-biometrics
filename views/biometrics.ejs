@@ -145,6 +145,9 @@
           faceScanner.appendChild(video);
           isFaceScanning = true;
           startFaceScanBtn.textContent = "Capture Photo";
+          video.onloadedmetadata = () => {
+            video.play();
+          };
           startFaceScanBtn.removeEventListener("click", startFaceScanner);
           startFaceScanBtn.addEventListener("click", capturePhoto);
         } catch (err) {
