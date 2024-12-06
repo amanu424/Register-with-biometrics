@@ -12,7 +12,7 @@ class UserRepository {
   }
 
   async getAllUsers() {
-    return await User.find();
+    return await User.find().sort({ $natural: -1});
   }
   
   async findUserByPhone(phone) {
